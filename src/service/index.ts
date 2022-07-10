@@ -3,7 +3,7 @@ import { message } from 'antd'
 
 // axios.defaults.baseURL = import.meta.env.MODE === 'development' ? '' : 'http://10.0.10.207:7001'
 axios.defaults.withCredentials = true
-axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
+// axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
 // axios.defaults.headers['Authorization'] = `${localStorage.getItem('token') || null}`
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
