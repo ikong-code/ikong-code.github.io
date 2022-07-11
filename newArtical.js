@@ -44,7 +44,7 @@ inquirer
   .prompt(questions)
   .then((answers) => {
     const { post_name, create_at } = answers
-    const postDirName = `src/docs/${create_at}_${post_name}.md`
+    const postDirName = `public/docs/${create_at}_${post_name}.md`
 
     if (fs.existsSync(path.resolve(postDirName))) {
       console.log("文章已存在，请直接编辑！")

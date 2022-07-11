@@ -20,7 +20,7 @@ const routerConfig = [
         element: <List />,
       },
       {
-        path: "/detail",
+        path: "/detail/:filename",
         element: <Detail />,
       },
       {

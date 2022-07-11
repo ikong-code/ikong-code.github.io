@@ -12,6 +12,7 @@ import { Menu } from "antd"
 const Nav = () => {
   const [current, setCurrent] = React.useState<string>("/")
   const navigate = useNavigate()
+
   const items = [
     {
       label: "首页",

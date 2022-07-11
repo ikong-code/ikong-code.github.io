@@ -1,24 +1,39 @@
+import { useState, useEffect } from 'react'
 import { GithubOutlined } from "@ant-design/icons"
 import { Divider, Tag } from "antd"
+import axios from '@/service'
 import Avater from "@/assets/images/avater.jpg"
+import { ArticalProps, TagsList } from '@/types'
+import Tags from '../Tags'
 import "./index.less"
 
-const mockList = new Array(10)
-  .fill("")
-  .map((i) => Math.random().toString(36).slice(2))
-const colorList = [
-  "magenta",
-  "red",
-  "volcano",
-  "orange",
-  "gold",
-  "lime",
-  "green",
-  "cyan",
-  "blue",
-]
+const LayoutHeader = () => { 
+  const [tagList, setTagList] = useState<TagsList[]>([])
+  useEffect(() => {
+    const loadMD = async () => {
+      const { list = [] }: { list: ArticalProps[] } = await axios.get('public/docs/data.json')
+      const tagConnection: TagsList[] = []
+      list.forEach(i => {
+        const tags = i.tags.split(',')
+        tags.forEach(tag => {
+          const existIdx = tagConnection.findIndex((t: TagsList) => t.tag === tag) 
+          if (existIdx === -1) {
+            tagConnection.push({ tag, count: 1 })
+          } else {
+            tagConnection[existIdx] =  {
+              ...tagConnection[existIdx],
+              count: tagConnection[existIdx].count +1
+            }
+          }
+        })
+      })
 
-const LayoutHeader = () => (
+      setTagList(tagConnection)
+    }
+    loadMD()
+  }, [])
+
+  return(
   <div className="blog-introduct w-280px p-12px pr-30px pl-30px pt-30px overflow-y-auto">
     <img className="w-132px  h-132px rounded-full" src={Avater} alt="avater" />
     <h2 className="text-center m-10px font-blod text-1.5em">iKong</h2>
@@ -65,16 +80,17 @@ const LayoutHeader = () => (
       <Divider orientation="left">标签</Divider>
     </div>
     <div className="text-center">
-      {mockList.map((i) => (
+      <Tags tagList={tagList} />
+      {/* {tagList.map((i) => (
         <Tag
           className="!mt-6px"
           color={colorList[Math.floor(Math.random() * 9)]}
         >
-          <a href={`/tags?tag=${i}`}>{i}</a>
+          <a href={`/tags?tag=${i.tag}`}>{`${i.tag}(${i.count})`}</a>
         </Tag>
-      ))}
+      ))} */}
     </div>
   </div>
-)
+)}
 
 export default LayoutHeader
