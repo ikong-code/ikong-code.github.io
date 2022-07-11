@@ -11,15 +11,9 @@ const Detail = () => {
   const [content, setContent] = useState("")
   useEffect(() => {
     console.log(params.filename, import.meta.env.MODE)
-    axios
-      .get(
-        (import.meta.env.MODE === "development"
-          ? "../public/docs/"
-          : "public/docs/") + params.filename
-      )
-      .then((res: any) => {
-        setContent(res)
-      })
+    axios.get("/docs/" + params.filename).then((res: any) => {
+      setContent(res)
+    })
   }, [params.filename])
   return (
     <div className="p-20px">

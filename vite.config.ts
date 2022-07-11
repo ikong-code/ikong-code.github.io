@@ -2,18 +2,16 @@ import { defineConfig, normalizePath } from "vite"
 import react from "@vitejs/plugin-react"
 import autoprefixer from "autoprefixer"
 import WindiCSS from "vite-plugin-windicss"
-import { mdToJsonVitePlugin } from './mdToJson'
-import inspect from 'vite-plugin-inspect';
 import path from "path"
 
-const variablePath = normalizePath(
-  path.resolve("./src/assets/styles/variable.less")
-)
-// https://vitejs.dev/config/
+// const variablePath = normalizePath(
+//   path.resolve("./src/assets/styles/variable.less")
+// )
+
 export default defineConfig({
-  plugins: [react(), WindiCSS(), mdToJsonVitePlugin({type: 1}), inspect()],
+  plugins: [react(), WindiCSS()],
   build: {
-    outDir: "./docs",
+    outDir: "./build",
   },
   resolve: {
     alias: {
