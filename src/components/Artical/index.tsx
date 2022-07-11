@@ -6,15 +6,9 @@ import { Divider } from "antd"
 import { ArticalProps } from "@/types"
 
 const Artical = ({ detail }: { detail: ArticalProps }) => {
-  const { title, tags, time, filename } = detail
+  const { title, tags, time, filename, content } = detail
 
   const navigate = useNavigate()
-  const [content, setContent] = useState("")
-  useEffect(() => {
-    axios.get("/docs/" + filename).then((res: any) => {
-      setContent(res)
-    })
-  }, [])
 
   const handleDetail = () => {
     navigate("/detail/" + filename)

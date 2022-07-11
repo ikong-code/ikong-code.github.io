@@ -1,10 +1,10 @@
-const fs = require('fs');
+const fs = require("fs")
 
 // 同步读取上级目录下的所有文件到files中
-const docsPath = 'public/docs'
+const docsPath = "public/docs"
 
 async function buildDocs() {
-  const files = fs.readdirSync('public/docs').reverse();
+  const files = fs.readdirSync("public/docs").reverse()
   // const getContent = async (name) => {
   //   const options = {
   //     flag: 'r',
@@ -14,44 +14,49 @@ async function buildDocs() {
   //   return content
   // }
 
-const articalList = []
-files.forEach((i, idx) => {
-  // 匹配.md结尾的文件
-  if(i.indexOf('.md') === (i.length - 3)) {
-    const articalName = i.split('.md')[0]
-    const firstIndex = articalName.indexOf('_')
-    const time = articalName.slice(0, firstIndex)
-    let title = articalName.slice(firstIndex + 1)
-    // const content = await getContent(i)
-    
-    // 同步的方式 读取目标md文件内容
-    const content = fs.readFileSync(docsPath + '/' + i, 'utf-8')
-    let contentStr = content.split('\n')
-    let tags = ''
-    contentStr.forEach(c => {
-      // 获取文章 title
-      if (c.startsWith('title:')) {
-        console.log(c)
-        title = c.replace('title:', '') 
-      } else if (c.startsWith('tag: ')) {
-      // 获取文章 tags
-          tags = c.replace('tag: ', '')
-      }
-    })
-    console.log({id: idx, time, filename: i, title, tags})
-    articalList.push(
-      {
-        id: idx, time, filename: i, title, tags
-      }
-    ) 
-  }
-})
+  const articalList = []
+  files.forEach((i, idx) => {
+    // 匹配.md结尾的文件
+    if (i.indexOf(".md") === i.length - 3) {
+      const articalName = i.split(".md")[0]
+      const firstIndex = articalName.indexOf("_")
+      const time = articalName.slice(0, firstIndex)
+      let title = articalName.slice(firstIndex + 1)
+      // const content = await getContent(i)
 
-fs.writeFileSync(docsPath + '/data.json', JSON.stringify({ list: articalList }));
+      // 同步的方式 读取目标md文件内容
+      const content = fs.readFileSync(docsPath + "/" + i, "utf-8")
+      let contentStr = content.split("\n")
+      let tags = ""
+      contentStr.forEach((c) => {
+        // 获取文章 title
+        if (c.startsWith("title:")) {
+          console.log(c)
+          title = c.replace("title:", "")
+        } else if (c.startsWith("tag: ")) {
+          // 获取文章 tags
+          tags = c.replace("tag: ", "")
+        }
+      })
+      console.log({ id: idx, time, filename: i, title, tags, content })
+      articalList.push({
+        id: idx,
+        time,
+        filename: i,
+        title,
+        tags,
+        content,
+      })
+    }
+  })
 
+  fs.writeFileSync(
+    docsPath + "/data.json",
+    JSON.stringify({ list: articalList })
+  )
 
-console.log(articalList);
-console.log(files);
+  console.log(articalList)
+  console.log(files)
 }
 
 buildDocs()
@@ -71,8 +76,3 @@ buildDocs()
 //     }
 //   })
 // }
-
-
-
-
-

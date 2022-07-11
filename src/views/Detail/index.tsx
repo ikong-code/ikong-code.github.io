@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { Button } from "antd"
 import { LeftOutlined } from "@ant-design/icons"
 import ReactMarkdown from "react-markdown"
+import { ArticalProps } from "@/types"
 import axios from "@/service"
 
 const Detail = () => {
@@ -10,9 +11,12 @@ const Detail = () => {
   const navigate = useNavigate()
   const [content, setContent] = useState("")
   useEffect(() => {
-    console.log(params.filename, import.meta.env.MODE)
-    axios.get("/docs/" + params.filename).then((res: any) => {
-      setContent(res)
+    axios.get("/docs/data.json").then((res: any) => {
+      const { list = [] } = res
+      const tarIdx = list.findIndex(
+        (i: ArticalProps) => i.filename === params.filename
+      )
+      setContent(tarIdx > -1 ? list[tarIdx].content : "")
     })
   }, [params.filename])
   return (

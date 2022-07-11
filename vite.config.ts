@@ -13,6 +13,7 @@ export default defineConfig({
   build: {
     outDir: "./build",
   },
+  base: "./",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
