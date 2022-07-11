@@ -17,6 +17,7 @@ const Home = ({ type = "list" }: IProps) => {
 
   const [getParams] = useSearchParams()
   const tagName: any = getParams.get("tag")
+  const keyword: any = getParams.get("keyword")
   useEffect(() => {
     const loadMD = async () => {
       const { list = [] }: { list: ArticalProps[] } = await axios.get(
@@ -49,10 +50,16 @@ const Home = ({ type = "list" }: IProps) => {
       } else {
         filterList = [...list]
       }
+      if(keyword) {
+        filterList = filterList.filter((i) => {
+          console.log(i.title);
+          return i.title.indexOf(keyword) > -1
+        })
+      }
       setArticalList(filterList || [])
     }
     loadMD()
-  }, [tagName])
+  }, [tagName, keyword])
 
   return (
     <div className="artical-list pr-20px pt-30px pb-30px">
