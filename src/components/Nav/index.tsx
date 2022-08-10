@@ -4,6 +4,7 @@ import {
   HomeOutlined,
   FolderOutlined,
   GithubOutlined,
+  LikeOutlined
 } from "@ant-design/icons"
 import { useNavigate } from "react-router-dom"
 import { Menu } from "antd"
@@ -29,13 +30,28 @@ const Nav = () => {
       key: "tags",
       icon: <FolderOutlined />,
     },
+    {
+      label: "ik工具系列",
+      key: "tools",
+      icon: <LikeOutlined />,
+      children: [
+        {
+          type: 'ik-PPT',
+          label: (
+            <a href="https://ik-web-ppt.vercel.app/" target="_blank" rel="noopener noreferrer">
+              ik-ppt
+            </a>
+          ),
+        }
+      ]
+    }
   ]
 
-  // <GithubOutlined />
   const onClick = (e: any) => {
-    setCurrent(e.key)
-
-    e.key === "/" ? navigate(`/`) : navigate(`/${e.key}`)
+    if(['/', 'files', 'tags'].includes(e.key)) {
+      setCurrent(e.key)
+      e.key === "/" ? navigate(`/`) : navigate(`/${e.key}`)
+    }
   }
 
   const handleOpenGit = () => {

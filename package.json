@@ -1,7 +1,7 @@
 {
   "name": "ikong-code.github.io",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://ikong-code.github.io/",
   "scripts": {
     "dev": "vite",
