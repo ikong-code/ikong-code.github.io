@@ -21,11 +21,6 @@ const Nav = () => {
       icon: <HomeOutlined />,
     },
     {
-      label: "归档",
-      key: "files",
-      icon: <FormOutlined />,
-    },
-    {
       label: "分类",
       key: "tags",
       icon: <FolderOutlined />,
@@ -44,7 +39,12 @@ const Nav = () => {
           ),
         }
       ]
-    }
+    },
+    {
+      label: "归档",
+      key: "files",
+      icon: <FormOutlined />,
+    },
   ]
 
   const onClick = (e: any) => {

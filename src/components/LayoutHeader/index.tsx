@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { SearchOutlined } from "@ant-design/icons"
 import { Input } from "antd"
 import { useSearchParams } from 'react-router-dom'
-import LogoImg from "@/assets/images/logo.png"
+import LogoImg from "../../assets/images/logo.png"
 import Nav from "../Nav"
 import "./index.less"
 
