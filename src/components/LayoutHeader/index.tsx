@@ -8,9 +8,6 @@ import "./index.less"
 
 const LayoutHeader = () => {
   const [, setParams] = useSearchParams()
-  useEffect(() => {
-
-  }, [])
 
   const handleSearch = (e: { target: { value: string } }) => {
     setParams({keyword: (e.target.value).trim()})

@@ -26,6 +26,11 @@ const Nav = () => {
       icon: <FolderOutlined />,
     },
     {
+      label: "归档",
+      key: "files",
+      icon: <FormOutlined />,
+    },
+    {
       label: "ik工具系列",
       key: "tools",
       icon: <LikeOutlined />,
@@ -39,11 +44,6 @@ const Nav = () => {
           ),
         }
       ]
-    },
-    {
-      label: "归档",
-      key: "files",
-      icon: <FormOutlined />,
     },
   ]
 
